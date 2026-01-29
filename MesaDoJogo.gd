@@ -1,12 +1,22 @@
 extends Node
 
-# Variáveis do Placar
+# Placar
 var pontos_nos = 0
 var pontos_eles = 0
+var rodadas_vencidas_nos = 0 # Na mão atual (md3)
+var rodadas_vencidas_eles = 0
 
-# Pegando a referência do nó Baralho
-# @onready garante que o Godot espere o nó "Baralho" carregar antes de pegar
+# Estado da Mão
+var valor_atual_rodada = 1 # Começa valendo 1, pode ir para 3, 6, 9, 12
+var baralho_na_mesa = [] # O monte de cartas jogadas na mesa
+var turno_atual = "" # "jogador" ou "bot"
+
+# As Mãos (Arrays de dicionários de cartas)
+var mao_jogador = []
+var mao_bot = []
+
 @onready var baralho_script = $Baralho 
+@onready var maquina_estados = $MaquinaDeEstados
 
 func _ready():
 	print("Mesa montada. Iniciando jogo...")

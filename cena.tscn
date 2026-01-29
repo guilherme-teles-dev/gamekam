@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b04fnis1kxg3q" path="res://baralho.gd" id="1_2vsai"]
 [ext_resource type="Script" uid="uid://bd87df00tbe1e" path="res://MesaDoJogo.gd" id="1_fwo5d"]
+[ext_resource type="Script" uid="uid://q7lhjj025ens" path="res://maquina_de_estados.gd" id="3_mxkdn"]
 
 [node name="MesaDoJogo" type="Node" unique_id=1795508418]
 script = ExtResource("1_fwo5d")
@@ -16,6 +17,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="MaquinaDeEstados" type="Node" parent="." unique_id=1762291294]
+script = ExtResource("3_mxkdn")
 
 [node name="Estado_InicioRodada" type="Node" parent="MaquinaDeEstados" unique_id=1142047505]
 
