@@ -37,3 +37,23 @@ func comecar_nova_rodada():
 	print("Cartas do Bot: ", mao_bot)
 	
 	# Aqui você chamaria a Máquina de Estados para iniciar o turno
+	
+	# Função utilitária para mover carta de uma mão para a mesa
+func jogar_carta_na_mesa(quem_jogou: String, indice_carta: int):
+	var carta_jogada = null
+	
+	if quem_jogou == "jogador":
+		# pop_at remove o item do array e o retorna
+		carta_jogada = mao_jogador.pop_at(indice_carta)
+	elif quem_jogou == "bot":
+		carta_jogada = mao_bot.pop_at(indice_carta)
+		
+	if carta_jogada:
+		# Adiciona ao monte da mesa
+		# Vamos guardar quem jogou junto com a carta para saber quem ganha depois
+		var jogada = {"carta": carta_jogada, "dono": quem_jogou}
+		baralho_na_mesa.append(jogada)
+		print(quem_jogou.capitalize() + " jogou: " + str(carta_jogada["valor"]) + " de " + str(carta_jogada["naipe"]))
+		return true
+		
+	return false
