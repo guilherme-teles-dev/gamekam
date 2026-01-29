@@ -2,8 +2,8 @@ extends Node
 
 # Lista que vai guardar as cartas (usaremos dicionários simples por enquanto)
 var cartas = []
-var naipes = ["Ouros", "Espadas", "Copas", "Paus"]
-var valores = ["4", "5", "6", "7", "Q", "J", "K", "A", "2", "3"]
+var naipes = ["diamonds", "spades", "hearts", "clubs"]
+var valores = ["4", "5", "6", "7", "queen", "jack", "king", "A", "2", "3"]
 
 func _ready():
 	criar_baralho()
