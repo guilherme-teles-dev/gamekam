@@ -15,7 +15,7 @@ func _ready():
 	
 	# 2. Define o estado inicial do jogo
 	# Certifique-se que o nó filho se chama exatamente "Estado_InicioRodada"
-	trocar_estado($Estado_InicioRodada)
+	# trocar_estado($Estado_InicioRodada)
 
 # --- FUNÇÃO PRINCIPAL DE TRANSIÇÃO ---
 # É aqui que a mágica acontece. Um estado chama essa função para passar a vez.

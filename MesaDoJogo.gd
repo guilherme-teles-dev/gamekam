@@ -20,7 +20,8 @@ var mao_bot = []
 
 func _ready():
 	print("Mesa montada. Iniciando jogo...")
-	comecar_nova_rodada()
+	var estado_inicial = maquina_estados.get_node("Estado_InicioRodada")
+	maquina_estados.trocar_estado(estado_inicial)
 
 func comecar_nova_rodada():
 	# Passo 1: O Juiz manda o Dealer reembaralhar

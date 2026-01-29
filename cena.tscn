@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b04fnis1kxg3q" path="res://baralho.gd" id="1_2vsai"]
 [ext_resource type="Script" uid="uid://bd87df00tbe1e" path="res://MesaDoJogo.gd" id="1_fwo5d"]
 [ext_resource type="Script" uid="uid://q7lhjj025ens" path="res://maquina_de_estados.gd" id="3_mxkdn"]
+[ext_resource type="Script" uid="uid://coa0sx8syuqt0" path="res://estado_inicio_rodada.gd" id="4_c3sxu"]
+[ext_resource type="Script" uid="uid://cyupwhgbxlucl" path="res://estado_turno_jogador.gd" id="5_828d7"]
 
 [node name="MesaDoJogo" type="Node" unique_id=1795508418]
 script = ExtResource("1_fwo5d")
@@ -20,8 +22,10 @@ offset_bottom = 40.0
 script = ExtResource("3_mxkdn")
 
 [node name="Estado_InicioRodada" type="Node" parent="MaquinaDeEstados" unique_id=1142047505]
+script = ExtResource("4_c3sxu")
 
 [node name="Estado_TurnoJogador" type="Node" parent="MaquinaDeEstados" unique_id=832627497]
+script = ExtResource("5_828d7")
 
 [node name="Estado_TurnoBot" type="Node" parent="MaquinaDeEstados" unique_id=1861475307]
 
