@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://c5tn822ev61k"]
 
+[ext_resource type="Script" uid="uid://b04fnis1kxg3q" path="res://baralho.gd" id="1_2vsai"]
+[ext_resource type="Script" uid="uid://bd87df00tbe1e" path="res://MesaDoJogo.gd" id="1_fwo5d"]
+
 [node name="MesaDoJogo" type="Node" unique_id=1795508418]
+script = ExtResource("1_fwo5d")
 
 [node name="Baralho" type="Node" parent="." unique_id=532360455]
+script = ExtResource("1_2vsai")
 
 [node name="UI_Placar" type="Control" parent="." unique_id=513309251]
 layout_mode = 3
