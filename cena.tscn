@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c5tn822ev61k"]
+
+[node name="MesaDoJogo" type="Node" unique_id=1795508418]
+
+[node name="Baralho" type="Node" parent="." unique_id=532360455]
+
+[node name="UI_Placar" type="Control" parent="." unique_id=513309251]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MaquinaDeEstados" type="Node" parent="." unique_id=1762291294]
+
+[node name="Estado_InicioRodada" type="Node" parent="MaquinaDeEstados" unique_id=1142047505]
+
+[node name="Estado_TurnoJogador" type="Node" parent="MaquinaDeEstados" unique_id=832627497]
+
+[node name="Estado_TurnoBot" type="Node" parent="MaquinaDeEstados" unique_id=1861475307]
+
+[node name="Estado_TurnoPediuTruco" type="Node" parent="MaquinaDeEstados" unique_id=1584585039]
+
+[node name="Estado_ResolucaoMao" type="Node" parent="MaquinaDeEstados" unique_id=774214272]
+
+[node name="CartasNaMesa" type="Node2D" parent="." unique_id=2109528377]
