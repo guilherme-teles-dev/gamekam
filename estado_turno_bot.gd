@@ -2,22 +2,23 @@ extends EstadoJogo
 
 func entrar():
 	print("\n--- VEZ DO BOT ---")
-	
-	# Simulação de "pensar" (opcional, mas bom pra ver o log)
 	await get_tree().create_timer(1.0).timeout
 	
-	# IA Super complexa: Joga sempre a primeira carta (índice 0)
+	# Bot joga a primeira carta que tiver (Lógica "Burra" temporária)
 	if mesa.mao_bot.size() > 0:
 		mesa.jogar_carta_na_mesa("bot", 0)
 	
-	# TRANSIÇÃO:
-	# Aqui a lógica do truco complica, pois depende de quem ganhou a mão.
-	# MAS, para testar hoje, vamos forçar voltar para o jogador ou terminar a rodada.
+	# --- MUDANÇA AQUI ---
+	# O Bot geralmente é o último a jogar nessa estrutura simples (Jogador puxa, Bot responde).
+	# Vamos verificar se a mão acabou (se tem 2 cartas na mesa).
 	
-	# Se ainda tiverem cartas, volta pro jogador. Se não, resolve a mão.
-	if mesa.mao_jogador.size() > 0:
-		get_parent().trocar_estado(get_parent().get_node("Estado_TurnoJogador"))
+	if mesa.baralho_na_mesa.size() == 2:
+		# A mão acabou (1 carta do jogador + 1 do bot)
+		print("Mão finalizada. Chamando o Juiz...")
+		var estado_juiz = get_parent().get_node("Estado_ResolucaoMao")
+		get_parent().trocar_estado(estado_juiz)
 	else:
-		# Ainda não criamos o script de Resolução, então vamos só avisar
-		print("--- Fim da vaza (mão) ---")
-		# Aqui o jogo vai parar por enquanto pois não tem pra onde ir
+		# Se por algum motivo o jogo continuar (ex: Truco em trios), passaria a vez.
+		# No nosso caso 1x1, isso raramente acontece aqui, mas por segurança:
+		var estado_jog = get_parent().get_node("Estado_TurnoJogador")
+		get_parent().trocar_estado(estado_jog)

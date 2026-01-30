@@ -32,16 +32,21 @@ func receber_input(event):
 			tentar_jogar(indice_escolhido)
 
 func tentar_jogar(indice):
-	# Verificação de segurança: O jogador tem essa carta?
 	if indice >= mesa.mao_jogador.size():
-		print("ERRO: Carta inválida! Escolha uma carta que você possui.")
+		print("ERRO: Carta inválida!")
 		mostrar_opcoes()
 		return
 
-	# Executa a jogada na mesa
+	# Executa a jogada
 	mesa.jogar_carta_na_mesa("jogador", indice)
 	
-	# TRANSIÇÃO:
-	# Agora vai para o turno do Bot
-	var proximo = get_parent().get_node("Estado_TurnoBot")
-	get_parent().trocar_estado(proximo)
+	# --- CORREÇÃO AQUI ---
+	# Verificamos se a mesa ficou cheia (2 cartas) APÓS a minha jogada.
+	if mesa.baralho_na_mesa.size() == 2:
+		print("Mão finalizada pelo jogador. Chamando o Juiz...")
+		var estado_juiz = get_parent().get_node("Estado_ResolucaoMao")
+		get_parent().trocar_estado(estado_juiz)
+	else:
+		# Se só tem 1 carta (a minha), passa a vez para o Bot
+		var proximo = get_parent().get_node("Estado_TurnoBot")
+		get_parent().trocar_estado(proximo)
