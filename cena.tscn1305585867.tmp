@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://baralho.gd" id="1_2vsai"]
 [ext_resource type="Script" uid="uid://bd87df00tbe1e" path="res://MesaDoJogo.gd" id="1_fwo5d"]
 [ext_resource type="Script" path="res://maquina_de_estados.gd" id="3_mxkdn"]
-[ext_resource type="Script" uid="uid://coa0sx8syuqt0" path="res://estado_inicio_rodada.gd" id="4_c3sxu"]
+[ext_resource type="Script" path="res://estado_inicio_rodada.gd" id="4_c3sxu"]
 [ext_resource type="Script" path="res://estado_turno_jogador.gd" id="5_828d7"]
 [ext_resource type="Script" path="res://estado_turno_bot.gd" id="6_wjoo6"]
+[ext_resource type="Script" uid="uid://dirifcwfxdbn1" path="res://sprite_2d.gd" id="7_w1627"]
 
 [node name="MesaDoJogo" type="Node" unique_id=1795508418]
 script = ExtResource("1_fwo5d")
@@ -16,10 +17,8 @@ script = ExtResource("1_2vsai")
 [node name="UI_Placar" type="Control" parent="." unique_id=513309251]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 581.0
-offset_top = 311.0
-offset_right = 621.0
-offset_bottom = 351.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="MaquinaDeEstados" type="Node" parent="." unique_id=1762291294]
 script = ExtResource("3_mxkdn")
@@ -37,13 +36,9 @@ script = ExtResource("6_wjoo6")
 
 [node name="Estado_ResolucaoMao" type="Node" parent="MaquinaDeEstados" unique_id=774214272]
 
-[node name="CartasNaMesa" type="Node2D" parent="." unique_id=1589797974]
-position = Vector2(581, 310)
+[node name="CartasNaMesa" type="Node2D" parent="." unique_id=2109528377]
 
-[node name="PosicaoJogador" type="Marker2D" parent="CartasNaMesa" unique_id=667659905]
-position = Vector2(0, -1)
+[node name="Sprite2D" type="Sprite2D" parent="CartasNaMesa" unique_id=1639173474]
+script = ExtResource("7_w1627")
 
-[node name="PosicaoBot" type="Marker2D" parent="CartasNaMesa" unique_id=662495607]
-
-[node name="MaoJogador" type="Node2D" parent="." unique_id=1289133401]
-position = Vector2(565, 556)
+[node name="cartas" type="Node2D" parent="." unique_id=977265740]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bdwaao8wkeo84"]
+
+[ext_resource type="Script" uid="uid://dwx63k0j5d525" path="res://carta_visual.gd" id="1_cqrsd"]
+
+[node name="CartaVisual" type="Node2D" unique_id=2031465282]
+position = Vector2(3, 1)
+script = ExtResource("1_cqrsd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1179588071]
