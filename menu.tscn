@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ddanks8k5cynk"]
+
+[node name="Menu" type="Node" unique_id=658432457]
+
+[node name="Botões" type="Node2D" parent="." unique_id=2096045067]
