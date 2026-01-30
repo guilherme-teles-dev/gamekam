@@ -30,3 +30,35 @@ func dar_mao_de_truco():
 		if cartas.size() > 0:
 			mao.append(cartas.pop_front()) # Tira a primeira carta da pilha
 	return mao
+
+# Retorna um número inteiro representando a força da carta.
+# Quanto maior o número, mais forte a carta.
+func obter_forca_truco(carta):
+	var v = carta["valor"]
+	var n = carta["naipe"]
+	
+	# --- 1. VERIFICA MANILHAS (Combinação Valor + Naipe) ---
+	if v == "4" and n == "Paus":
+		return 14 # ZAP (A mais forte do jogo)
+	if v == "7" and n == "Copas":
+		return 13 # ESCOPETA/COPAS
+	if v == "A" and n == "Espadas":
+		return 12 # ESPADILHA
+	if v == "7" and n == "Ouros":
+		return 11 # PICA-FUMO/OUROS
+		
+	# --- 2. VERIFICA CARTAS COMUNS (Apenas Valor importa) ---
+	# O naipe não importa para cartas que não são manilhas no Truco Paulista
+	match v:
+		"3": return 10
+		"2": return 9
+		"A": return 8
+		"K": return 7
+		"J": return 6
+		"Q": return 5
+		"7": return 4
+		"6": return 3
+		"5": return 2
+		"4": return 1
+		
+	return 0 # Caso de erro (não deve acontecer)

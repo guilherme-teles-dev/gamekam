@@ -3,8 +3,10 @@ extends Node
 # Placar
 var pontos_nos = 0
 var pontos_eles = 0
-var rodadas_vencidas_nos = 0 
-var rodadas_vencidas_eles = 0
+
+var vazas_nos = 0 # Na mão atual (md3)
+var vazas_eles = 0
+var empates = 0
 
 # Estado da Mão
 var valor_atual_rodada = 1 
