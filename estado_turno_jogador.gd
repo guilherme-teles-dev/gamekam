@@ -8,18 +8,33 @@ func mostrar_opcoes():
 	print("Sua mão atual:")
 	var indice = 1
 	for carta in mesa.mao_jogador:
-		# Ex: [1] 4 de Paus
+		# Mostra apenas a carta
 		print("[" + str(indice) + "] " + carta["valor"] + " de " + carta["naipe"])
 		indice += 1
-	print("Pressione a tecla 1, 2 ou 3 para jogar a carta correspondente.")
-
+	
+	# O print de instrução fica FORA do loop 'for'
+	print("Pressione 1, 2, 3 para jogar OU 'T' para pedir TRUCO.")
+	
 # Aqui capturamos o teclado físico
 func receber_input(event):
 	if event is InputEventKey and event.pressed:
 		
+		# --- INPUT DO TRUCO (Tecla T) ---
+		if event.keycode == KEY_T:
+			# Verifica se já não estamos no valor máximo
+			if mesa.valor_atual_rodada >= 12:
+				print("A rodada já vale 12! Não dá pra aumentar mais.")
+				return
+			
+			print(">>> Solicitando TRUCO...")
+			# Agora que você criou o nó, isso vai funcionar:
+			var estado_truco = get_parent().get_node("Estado_TurnoPediuTruco")
+			get_parent().trocar_estado(estado_truco)
+			return
+
+		# --- INPUT DAS CARTAS (Teclas 1, 2, 3) ---
 		var indice_escolhido = -1
 		
-		# Mapeando teclas físicas para índices do array (0, 1, 2)
 		if event.keycode == KEY_1 or event.keycode == KEY_KP_1:
 			indice_escolhido = 0
 		elif event.keycode == KEY_2 or event.keycode == KEY_KP_2:
@@ -27,7 +42,6 @@ func receber_input(event):
 		elif event.keycode == KEY_3 or event.keycode == KEY_KP_3:
 			indice_escolhido = 2
 			
-		# Se apertou uma tecla válida
 		if indice_escolhido != -1:
 			tentar_jogar(indice_escolhido)
 

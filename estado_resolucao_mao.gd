@@ -93,7 +93,7 @@ func finalizar_tento(ganhador):
 	
 	# Reseta variáveis da rodada
 	mesa.vazas_nos = 0
-	mesa.vazas_eles = 0
+	mesa.vazas_eles = 01
 	mesa.empates = 0
 	mesa.valor_atual_rodada = 1
 	mesa.mao_jogador.clear()

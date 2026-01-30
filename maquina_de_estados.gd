@@ -2,6 +2,7 @@ extends Node
 
 # Variável que guarda quem está no comando agora
 var estado_atual: EstadoJogo
+var estado_atual_anterior: EstadoJogo # <--- NOVA VARIÁVEL MEMÓRIA
 
 # Pegamos a referência do pai (MesaDoJogo) para passar aos filhos
 @onready var mesa = $".."
@@ -22,6 +23,7 @@ func _ready():
 func trocar_estado(novo_estado: EstadoJogo):
 	# 1. Se já existe um estado rodando, avisa que ele vai sair
 	if estado_atual:
+		estado_atual_anterior = estado_atual # <--- SALVA QUEM ESTAVA RODANDO ANTES
 		estado_atual.sair()
 	
 	# 2. Atualiza a variável para o novo estado

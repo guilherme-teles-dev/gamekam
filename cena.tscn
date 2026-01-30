@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cyupwhgbxlucl" path="res://estado_turno_jogador.gd" id="5_828d7"]
 [ext_resource type="Script" uid="uid://oh6dpgf6r20o" path="res://estado_turno_bot.gd" id="6_wjoo6"]
 [ext_resource type="Script" uid="uid://kuqw54a08vya" path="res://estado_resolucao_mao.gd" id="7_w1627"]
+[ext_resource type="Script" uid="uid://vxymtpqc1dcb" path="res://estado_turno_pediu_truco.gd" id="7_yan1i"]
 
 [node name="MesaDoJogo" type="Node" unique_id=1795508418]
 script = ExtResource("1_fwo5d")
@@ -33,6 +34,7 @@ script = ExtResource("5_828d7")
 script = ExtResource("6_wjoo6")
 
 [node name="Estado_TurnoPediuTruco" type="Node" parent="MaquinaDeEstados" unique_id=1584585039]
+script = ExtResource("7_yan1i")
 
 [node name="Estado_ResolucaoMao" type="Node" parent="MaquinaDeEstados" unique_id=774214272]
 script = ExtResource("7_w1627")
