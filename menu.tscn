@@ -1,5 +1,75 @@
 [gd_scene format=3 uid="uid://ddanks8k5cynk"]
 
-[node name="Menu" type="Node" unique_id=658432457]
+[ext_resource type="Texture2D" uid="uid://bcrkc2guxm6uv" path="res://assets/world_building/background.png" id="1_4hy44"]
+[ext_resource type="Texture2D" uid="uid://guj6yj8ih7pi" path="res://assets/world_building/buttons/sub-button1_normal.png" id="2_ytr4m"]
+[ext_resource type="Texture2D" uid="uid://db8ufsyu60i05" path="res://assets/world_building/buttons/sub-button3_normal.png" id="3_l48gv"]
+[ext_resource type="Texture2D" uid="uid://d0fcig73gy4n8" path="res://assets/world_building/buttons/sub-button2_normal.png" id="4_ecwwl"]
 
-[node name="Botões" type="Node2D" parent="." unique_id=2096045067]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kk3ma"]
+load_path = "res://.godot/imported/logo.png-56d109d2a72c414bdf1db4d9e864d09b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nrnbx"]
+texture = ExtResource("2_ytr4m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iqepy"]
+texture = ExtResource("3_l48gv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1wq0"]
+texture = ExtResource("4_ecwwl")
+
+[node name="Menu" type="Control" unique_id=651399410]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background" type="Node2D" parent="." unique_id=547826221]
+
+[node name="background" type="TextureRect" parent="Background" unique_id=1093607784]
+offset_left = 2.4963987
+offset_top = 0.19841766
+offset_right = 1026.4963
+offset_bottom = 1024.1984
+scale = Vector2(1.1221201, 0.6322513)
+texture = ExtResource("1_4hy44")
+
+[node name="UIMenu" type="CenterContainer" parent="." unique_id=586195738]
+layout_mode = 1
+offset_right = 1024.0
+offset_bottom = 1172.0
+scale = Vector2(1.1283462, 0.5552494)
+
+[node name="MenuOpcoes" type="VBoxContainer" parent="UIMenu" unique_id=757284069]
+layout_mode = 2
+theme_override_constants/separation = -200
+alignment = 1
+
+[node name="LogoGame" type="TextureRect" parent="UIMenu/MenuOpcoes" unique_id=1573482937]
+custom_minimum_size = Vector2(400, 1000)
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_kk3ma")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="botoes" type="VBoxContainer" parent="UIMenu/MenuOpcoes" unique_id=1873664389]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="jogar" type="Button" parent="UIMenu/MenuOpcoes/botoes" unique_id=611333941]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxTexture_nrnbx")
+text = "Jogar"
+
+[node name="opcoes" type="Button" parent="UIMenu/MenuOpcoes/botoes" unique_id=850858865]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxTexture_iqepy")
+text = "Opções"
+
+[node name="sair" type="Button" parent="UIMenu/MenuOpcoes/botoes" unique_id=2041484900]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxTexture_h1wq0")
+text = "Sair"
