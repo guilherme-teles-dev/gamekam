@@ -1,8 +1,6 @@
 extends Node
-
-# Variável que guarda quem está no comando agora
-var estado_atual: EstadoJogo
-var estado_atual_anterior: EstadoJogo # <--- NOVA VARIÁVEL MEMÓRIA
+var estado_atual: Node = null
+var estado_atual_anterior: Node = null # <--- CRIAR ESSA VARIÁVEL
 
 # Pegamos a referência do pai (MesaDoJogo) para passar aos filhos
 @onready var mesa = $".."
@@ -13,6 +11,7 @@ func _ready():
 	for filho in get_children():
 		if filho is EstadoJogo:
 			filho.mesa = mesa
+	pass
 	
 	# 2. Define o estado inicial do jogo
 	# Certifique-se que o nó filho se chama exatamente "Estado_InicioRodada"
@@ -20,19 +19,13 @@ func _ready():
 
 # --- FUNÇÃO PRINCIPAL DE TRANSIÇÃO ---
 # É aqui que a mágica acontece. Um estado chama essa função para passar a vez.
-func trocar_estado(novo_estado: EstadoJogo):
-	# 1. Se já existe um estado rodando, avisa que ele vai sair
+func trocar_estado(novo_estado: Node):
 	if estado_atual:
 		estado_atual_anterior = estado_atual # <--- SALVA QUEM ESTAVA RODANDO ANTES
 		estado_atual.sair()
 	
-	# 2. Atualiza a variável para o novo estado
 	estado_atual = novo_estado
-	
-	# 3. Avisa o novo estado que ele entrou no comando
-	if estado_atual:
-		print("Estado alterado para: ", estado_atual.name)
-		estado_atual.entrar()
+	estado_atual.entrar()
 
 # --- DELEGAÇÃO (Passando a batata quente) ---
 # O Godot chama essas funções no Gerente, e o Gerente repassa para o Estado Atual.

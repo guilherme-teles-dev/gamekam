@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://b1sipc8bgcigm"]
 
 [ext_resource type="PackedScene" uid="uid://ddanks8k5cynk" path="res://menu.tscn" id="1_yx7mw"]
-[ext_resource type="PackedScene" uid="uid://bl3w0f0j424km" path="res://partida.tscn" id="2_ykeeq"]
 
 [node name="MainGame" type="Node" unique_id=491795376]
 
-[node name="Menu" parent="." unique_id=658432457 instance=ExtResource("1_yx7mw")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=376743042]
+layer = 100
 
-[node name="Partida" parent="." unique_id=300806324 instance=ExtResource("2_ykeeq")]
+[node name="Menu" parent="CanvasLayer" unique_id=658432457 instance=ExtResource("1_yx7mw")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

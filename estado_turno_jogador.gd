@@ -7,12 +7,14 @@ func entrar():
 func mostrar_opcoes():
 	print("Sua mão atual:")
 	var indice = 1
-	for carta in mesa.mao_jogador:
-		# Mostra apenas a carta
-		print("[" + str(indice) + "] " + carta["valor"] + " de " + carta["naipe"])
+	
+	# CORREÇÃO 1: Acessamos a lista 'cartas_na_mao' dentro do objeto mao_jogador
+	for carta in mesa.mao_jogador.cartas_na_mao:
+		
+		# CORREÇÃO 2: Usamos ponto (.) porque agora 'carta' é um Nó/Objeto, não Dicionário
+		print("[" + str(indice) + "] " + str(carta.valor) + " de " + str(carta.naipe))
 		indice += 1
 	
-	# O print de instrução fica FORA do loop 'for'
 	print("Pressione 1, 2, 3 para jogar OU 'T' para pedir TRUCO.")
 	
 # Aqui capturamos o teclado físico
@@ -21,15 +23,14 @@ func receber_input(event):
 		
 		# --- INPUT DO TRUCO (Tecla T) ---
 		if event.keycode == KEY_T:
-			# Verifica se já não estamos no valor máximo
 			if mesa.valor_atual_rodada >= 12:
 				print("A rodada já vale 12! Não dá pra aumentar mais.")
 				return
 			
 			print(">>> Solicitando TRUCO...")
-			# Agora que você criou o nó, isso vai funcionar:
 			var estado_truco = get_parent().get_node("Estado_TurnoPediuTruco")
-			get_parent().trocar_estado(estado_truco)
+			if estado_truco:
+				get_parent().trocar_estado(estado_truco)
 			return
 
 		# --- INPUT DAS CARTAS (Teclas 1, 2, 3) ---
@@ -46,16 +47,16 @@ func receber_input(event):
 			tentar_jogar(indice_escolhido)
 
 func tentar_jogar(indice):
-	if indice >= mesa.mao_jogador.size():
-		print("ERRO: Carta inválida!")
-		mostrar_opcoes()
+	# CORREÇÃO 3: Verificamos o tamanho da lista interna
+	if indice >= mesa.mao_jogador.cartas_na_mao.size():
+		print("ERRO: Carta inválida ou já jogada!")
+		# Não chamamos mostrar_opcoes() aqui para não spammar o console
 		return
 
 	# Executa a jogada
 	mesa.jogar_carta_na_mesa("jogador", indice)
 	
-	# --- CORREÇÃO AQUI ---
-	# Verificamos se a mesa ficou cheia (2 cartas) APÓS a minha jogada.
+	# Verificamos se a mesa ficou cheia (2 cartas)
 	if mesa.baralho_na_mesa.size() == 2:
 		print("Mão finalizada pelo jogador. Chamando o Juiz...")
 		var estado_juiz = get_parent().get_node("Estado_ResolucaoMao")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dbt8bkgs7lxo0"]
+
+[ext_resource type="Script" uid="uid://bddey2ckfydvv" path="res://mao.gd" id="1_yq750"]
+
+[node name="Mao" type="Node2D" unique_id=597509163]
+script = ExtResource("1_yq750")

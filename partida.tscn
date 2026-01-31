@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://bl3w0f0j424km"]
 
 [ext_resource type="PackedScene" uid="uid://c5tn822ev61k" path="res://cena.tscn" id="1_pncst"]
-[ext_resource type="PackedScene" uid="uid://dsqtu2wy3nnm3" path="res://ui.tscn" id="2_fxb2x"]
 
 [node name="Partida" type="Node" unique_id=300806324]
 
 [node name="MesaDoJogo" parent="." unique_id=1795508418 instance=ExtResource("1_pncst")]
-
-[node name="UI" parent="." unique_id=628963171 instance=ExtResource("2_fxb2x")]

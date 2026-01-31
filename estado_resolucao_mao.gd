@@ -5,19 +5,26 @@ func entrar():
 	resolver_vencedor_mao()
 
 func resolver_vencedor_mao():
-	var carta_1 = mesa.baralho_na_mesa[0] # Primeira carta jogada
-	var carta_2 = mesa.baralho_na_mesa[1] # Segunda carta jogada
+	var jogada_1 = mesa.baralho_na_mesa[0] 
+	var jogada_2 = mesa.baralho_na_mesa[1] 
 	
-	# Calcula força
-	var f1 = mesa.baralho_script.obter_forca_truco(carta_1["carta"])
-	var f2 = mesa.baralho_script.obter_forca_truco(carta_2["carta"])
+	# 1. Recuperamos o Objeto Carta Visual
+	# CORREÇÃO: A chave correta é "carta_no", definida lá no MesaDoJogo.gd
+	var objeto_carta_1 = jogada_1["carta_no"]
+	var objeto_carta_2 = jogada_2["carta_no"]
 	
-	var vencedor_da_mao = "" # "jogador" ou "bot"
+	# 2. Criamos dicionários temporários para a função 'obter_forca_truco' entender
+	# (Pois a função antiga espera um dicionário, não um objeto visual)
+	var dados_c1 = {"valor": objeto_carta_1.valor, "naipe": objeto_carta_1.naipe}
+	var dados_c2 = {"valor": objeto_carta_2.valor, "naipe": objeto_carta_2.naipe}
 	
-	# Verifica quem jogou qual carta para atribuir a vitória corretamente
-	# (Lembre-se: carta_1 nem sempre é do jogador, depende de quem começou)
-	var dono_c1 = carta_1["dono"]
-	var dono_c2 = carta_2["dono"]
+	# 3. Calcula força
+	var f1 = mesa.baralho_script.obter_forca_truco(dados_c1)
+	var f2 = mesa.baralho_script.obter_forca_truco(dados_c2)
+	
+	var vencedor_da_mao = "" 
+	var dono_c1 = jogada_1["dono"]
+	var dono_c2 = jogada_2["dono"]
 	
 	if f1 > f2:
 		vencedor_da_mao = dono_c1
@@ -28,19 +35,21 @@ func resolver_vencedor_mao():
 
 	print("Vencedor da Vaza: " + vencedor_da_mao.to_upper())
 	
-	# --- ATUALIZAR PLACAR DA RODADA ---
+	# --- Atualização do Placar (O resto segue igual) ---
 	if vencedor_da_mao == "jogador":
 		mesa.vazas_nos += 1
 	elif vencedor_da_mao == "bot":
 		mesa.vazas_eles += 1
 	else:
 		mesa.empates += 1
-		# Regra simplificada de empate: Ambos ganham ponto na vaza 
-		# (No Truco real a regra de empate é complexa, vamos manter simples por enquanto)
 		mesa.vazas_nos += 1
 		mesa.vazas_eles += 1
 	
-	mesa.baralho_na_mesa.clear() # Limpa a mesa
+	# Limpa visualmente as cartas da mesa (Destruindo os nós)
+	for jogada in mesa.baralho_na_mesa:
+		jogada["carta_no"].queue_free()
+		
+	mesa.baralho_na_mesa.clear() # Limpa o array lógico
 	
 	verificar_fim_rodada(vencedor_da_mao)
 
@@ -91,15 +100,30 @@ func finalizar_tento(ganhador):
 		
 	print("PLACAR GERAL: Nós " + str(mesa.pontos_nos) + " x " + str(mesa.pontos_eles) + " Eles")
 	
+	# --- CORREÇÃO: LIMPEZA DA MESA (O Bug estava aqui) ---
+	# Se alguém correu do truco com cartas na mesa, elas ficaram lá.
+	# Precisamos destruir os visuais e limpar a lista lógica.
+	for jogada in mesa.baralho_na_mesa:
+		if is_instance_valid(jogada["carta_no"]):
+			jogada["carta_no"].queue_free()
+	mesa.baralho_na_mesa.clear()
+	# -----------------------------------------------------
+
 	# Reseta variáveis da rodada
 	mesa.vazas_nos = 0
-	mesa.vazas_eles = 01
+	mesa.vazas_eles = 0
 	mesa.empates = 0
 	mesa.valor_atual_rodada = 1
-	mesa.mao_jogador.clear()
-	mesa.mao_bot.clear()
+
+	# Destrói todas as cartas visuais que sobraram na mão
+	for carta in mesa.mao_jogador.cartas_na_mao:
+		carta.queue_free()
+	mesa.mao_jogador.cartas_na_mao.clear()
+	
+	for carta in mesa.mao_bot.cartas_na_mao:
+		carta.queue_free()
+	mesa.mao_bot.cartas_na_mao.clear()
 	
 	# Reinicia o ciclo (Nova distribuição de cartas)
-	# Pequena pausa dramática
 	await get_tree().create_timer(2.0).timeout
 	get_parent().trocar_estado(get_parent().get_node("Estado_InicioRodada"))
